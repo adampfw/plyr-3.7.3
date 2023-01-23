@@ -3266,8 +3266,8 @@ typeof navigator === "object" && (function (Sentry, Shr) {
         if (control === 'download') {
           const attributes = extend({}, defaultAttributes, {
             element: 'a',
-            href: this.download,
-            target: '_blank'
+            href: this.download
+            // target: '_blank',
           });
 
           // Set download attribute for HTML5 only

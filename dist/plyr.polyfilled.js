@@ -3221,8 +3221,8 @@ typeof navigator === "object" && (function (global, factory) {
         if (control === 'download') {
           const attributes = extend({}, defaultAttributes, {
             element: 'a',
-            href: this.download,
-            target: '_blank'
+            href: this.download
+            // target: '_blank',
           });
 
           // Set download attribute for HTML5 only

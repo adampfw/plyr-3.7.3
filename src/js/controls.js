@@ -1581,7 +1581,7 @@ const controls = {
         const attributes = extend({}, defaultAttributes, {
           element: 'a',
           href: this.download,
-          target: '_blank',
+          // target: '_blank',
         });
 
         // Set download attribute for HTML5 only
