@@ -4734,7 +4734,11 @@ typeof navigator === "object" && (function (global, factory) {
       // Wait until ui is ready
       return ready.call(this)
       // Load image
-      .then(() => loadImage(poster)).catch(error => {
+      .then(() => {
+        if (!this.media.dataset.posterLazyload) {
+          loadImage(poster);
+        }
+      }).catch(error => {
         // Hide poster on error unless it's been set by another call
         if (poster === this.poster) {
           ui.togglePoster.call(this, false);
