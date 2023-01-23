@@ -5299,6 +5299,13 @@ class Listeners {
         const play = seek.hasAttribute(attribute);
         // Done seeking
         const done = ['mouseup', 'touchend', 'keyup'].includes(event.type);
+        // Copy of code from seek input bind
+        let seekTo = seek.getAttribute('seek-value');
+        if (is.empty(seekTo)) {
+          seekTo = seek.value;
+        }
+        seek.removeAttribute('seek-value');
+        player.currentTime = seekTo / seek.max * player.duration;
 
         // If we're done seeking and it was playing, resume playback
         if (play && done) {
