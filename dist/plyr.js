@@ -4710,8 +4710,10 @@ typeof navigator === "object" && (function (global, factory) {
         const {
           elements
         } = player;
-        // IE doesn't support input event, so we fallback to change
-        const inputEvent = browser.isIE ? 'change' : 'input';
+        // NOTE: Currently only using change to avoid indirect over-eager segment fetch
+        // requests for HTTP Adaptive Streaming cases, since 'change' will only fire
+        // after the thumb is released for an input[type=range] (CJP).
+        const inputEvent = 'change';
 
         // Play/pause toggle
         if (elements.buttons.play) {
