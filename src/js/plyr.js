@@ -893,7 +893,11 @@ class Plyr {
       return null;
     }
 
-    return this.media.getAttribute('poster') || this.media.getAttribute('data-poster');
+    return (
+      this.media.getAttribute('poster') ||
+      this.media.getAttribute('data-poster') ||
+      this.media.getAttribute('data-poster-lazyload')
+    );
   }
 
   /**

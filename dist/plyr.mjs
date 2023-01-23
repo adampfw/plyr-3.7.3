@@ -4265,11 +4265,20 @@ const ui = {
         throw new Error('setPoster cancelled by later call to setPoster');
       }
     }).then(() => {
-      Object.assign(this.elements.poster.style, {
-        backgroundImage: `url('${poster}')`,
-        // Reset backgroundSize as well (since it can be set to "cover" for padded thumbnails for youtube)
-        backgroundSize: ''
-      });
+      if (this.media.dataset.posterLazyload) {
+        this.elements.poster.classList.add('lazyload');
+        this.elements.poster.dataset.bg = this.media.dataset.posterLazyload;
+        Object.assign(this.elements.poster.style, {
+          // Reset backgroundSize as well (since it can be set to "cover" for padded thumbnails for youtube)
+          backgroundSize: ''
+        });
+      } else {
+        Object.assign(this.elements.poster.style, {
+          backgroundImage: `url('${poster}')`,
+          // Reset backgroundSize as well (since it can be set to "cover" for padded thumbnails for youtube)
+          backgroundSize: ''
+        });
+      }
       ui.togglePoster.call(this, true);
       return poster;
     });
@@ -8497,7 +8506,7 @@ class Plyr {
     if (!this.isVideo) {
       return null;
     }
-    return this.media.getAttribute('poster') || this.media.getAttribute('data-poster');
+    return this.media.getAttribute('poster') || this.media.getAttribute('data-poster') || this.media.getAttribute('data-poster-lazyload');
   }
 
   /**
